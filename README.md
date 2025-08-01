@@ -16,7 +16,8 @@
 
 ### 🎯 Overview  
 Experience a thrilling 3D circular racing challenge! Control your car on a looping track while dynamically generated vehicles (🚙 sedans/🚚 trucks) appear every **5 laps**. Avoid collisions, master your speed, and push your limits! Built with **Three.js** for immersive graphics and **TypeScript** for robust code.  
-to play [PLAY! on gh-pages](https://yermaka-a.github.io/traffic-run-game/)
+
+To play: [PLAY! on gh-pages](https://yermaka-a.github.io/traffic-run-game/)
 ---
 
 ### 🎮 Controls  
