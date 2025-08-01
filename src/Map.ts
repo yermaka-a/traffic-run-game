@@ -173,8 +173,8 @@ export const renderMap = (
   );
 
   const fieldMesh = new THREE.Mesh(fieldGeometry, [
-    new THREE.MeshLambertMaterial({ color: 0x67c240 }),
-    new THREE.MeshLambertMaterial({ color: 0x23311c }),
+    new THREE.MeshLambertMaterial({ color: 0x3ebb9e }),
+    new THREE.MeshLambertMaterial({ color: 0x3ebb9e }),
   ]);
   scene.add(fieldMesh);
 };

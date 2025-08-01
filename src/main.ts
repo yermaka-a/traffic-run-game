@@ -5,9 +5,9 @@ import { renderMap } from "./Map";
 import { trackRadius, arcCenterX, config } from "./help-values";
 import { pickRandom } from "./helpers";
 window.focus(); // Capture keys right away (by default focus is on editor)
-
+const gameContainer = document.getElementById("game-container");
 const resultsElement = document.getElementById("results");
-
+const popupElement: HTMLDivElement | null = document.querySelector(".popup");
 function getDistance(coordinate1, coordinate2) {
   const horizontalDistance = coordinate2.x - coordinate1.x;
   const verticalDistance = coordinate2.y - coordinate1.y;
@@ -71,7 +71,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 renderMap(scene, cameraWidth, cameraHeight * 2);
 
-document.body.appendChild(renderer.domElement);
+gameContainer!.appendChild(renderer.domElement);
 
 const getVehicleSpeed = (type: string | number): number => {
   if (type === "car") {
@@ -238,13 +238,14 @@ const animation = (timestamp: number) => {
 
   const timeDelta = timestamp - lastTimestamp;
   movePlayerCar(timeDelta);
-
+  
   const laps = Math.floor(Math.abs(playerAngleMoved) / (Math.PI * 2));
 
   // update score if it changed
   if (laps != score) {
+    
     score = laps;
-    if (scoreElement) scoreElement.innerText = score;
+    if (scoreElement) scoreElement.innerText = "Количество кругов: " + score;
   }
 
   // add a new vehicle at start and with every 5th lap
@@ -283,7 +284,7 @@ const reset = () => {
   playerAngleMoved = 0;
   movePlayerCar(0);
   score = 0;
-  if (scoreElement) scoreElement.innerText = score;
+  if (scoreElement) scoreElement.innerText = "Количество кругов: " + score;
   lastTimestamp = undefined;
 
   // remove other vehicles
@@ -298,7 +299,7 @@ const reset = () => {
 reset();
 const startGame = () => {
   if (ready) {
-    ready = false;
+    popupElement!.style.display = "none";
     renderer.setAnimationLoop(animation);
   }
 };
@@ -317,6 +318,7 @@ window.addEventListener("keydown", (e) => {
   }
 
   if (e.key == "R" || e.key == "r") {
+    popupElement!.style.display = "block";
     reset();
     return;
   }
@@ -333,4 +335,20 @@ window.addEventListener("keyup", (e) => {
     decelerate = false;
     return;
   }
+});
+
+window.addEventListener("resize", () => {
+  console.log("resize", window.innerWidth, window.innerHeight);
+
+  // Adjust camera
+  const newAspectRatio = window.innerWidth / window.innerHeight;
+  const adjustedCameraHeight = cameraWidth / newAspectRatio;
+
+  camera.top = adjustedCameraHeight / 2;
+  camera.bottom = adjustedCameraHeight / -2;
+  camera.updateProjectionMatrix(); // Must be called after change
+
+  // Reset renderer
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.render(scene, camera);
 });

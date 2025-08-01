@@ -3,11 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Car-game</title>
   </head>
   <body>
-    <div id="score">0</div>
+    <header>
+      <div>
+        <h1>Car-game</h1>
+        <div id="score">Количество кругов: 0</div>
+      </div>
+    </header>
+    <div class="popup">
+      <div class="back">
+        <div>Чтобы начать игру нажмите <strong>&uarr;</strong></div>
+        <div>Чтобы замедлиться, нажмите <strong>&darr;</strong></div>
+        <div>Чтобы перезапустить игру нажмите <strong>R</strong></div>
+      </div>
+    </div>
+    <div id="game-container"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
