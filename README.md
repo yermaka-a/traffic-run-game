@@ -38,7 +38,7 @@ To play: [PLAY! on gh-pages](https://yermaka-a.github.io/traffic-run-game/)
   - Colliding with any ends the game!  
 - **Speed Dynamics**:  
   - Hold `↑` to accelerate smoothly.  
-  - Hold `↓` to brake/reverse.  
+  - Hold `↓` to slow down smoothly.  
 
 ---
 
